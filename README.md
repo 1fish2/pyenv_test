@@ -6,7 +6,7 @@ The `CONFIGURE_OPTS="--enable-shared"` argument is not (always?) required to rep
 
 The key step is `pip install numpy==1.9.2 Cython`. It doesn't fail but sets up setup.py for failure unless you include the option `--no-binary :all:` or remove the numpy version specifier `==1.9.2`.
 
-It's also possible to get through the setup.py stage and encounter the error `ImportError: dlopen(/usr/local/var/pyenv/versions/2.7.11/envs/wcEcoli/lib/python2.7/site-packages/_line_profiler.so, 2): Symbol not found: _PyUnicodeUCS2_Compare` when running the code under kernprof. (You must first install it via `pip install line_profiler; pyenv rehash`).
+It's also possible to get through the setup.py stage and encounter the error `ImportError: dlopen(.../_line_profiler.so, 2): Symbol not found: _PyUnicodeUCS2_Compare` when running the code under kernprof. (You must first install it via `pip install line_profiler; pyenv rehash`).
 
 
 ## License
