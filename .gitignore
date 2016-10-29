@@ -1,0 +1,20 @@
+# Build outputs
+/build/
+*.pyc
+*.so
+*.o
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+
+# Cython generated files
+sum.c
+sum.html
+
+# kernprof.py output
+*.lprof
+
+# pyenv python version
+.python-version
