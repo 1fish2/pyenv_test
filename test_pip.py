@@ -1,12 +1,12 @@
 """
-TestEnv.py -- Test case for pyenv, pyenv virtualenv, Cythonize.
+test_pip.py -- Test case for a `pip install` problem under pyenv virtualenv.
 """
 
 import unittest
 import numpy as np
 from sum import sum
 
-class TestEnv(unittest.TestCase):
+class TestPip(unittest.TestCase):
 
     def test_case(self):
         a = np.arange(5)

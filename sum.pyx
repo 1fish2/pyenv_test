@@ -1,5 +1,5 @@
 """
-sum.pyx -- Cython test code for pyenv, pyenv virtualenv, Cythonize.
+sum.pyx -- Cython test code for pip install under pyenv virtualenv.
 """
 
 import numpy as np

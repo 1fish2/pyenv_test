@@ -1,4 +1,6 @@
 """
+Test case for a `pip install` problem under pyenv virtualenv.
+
 0. Background, if not already done on this computer:
     brew install pyenv
     brew install pyenv-virtualenv
@@ -18,7 +20,7 @@
     rm -f sum.so sum.c; python setup.py build_ext --inplace
 
 3. If you get this far, run the test case:
-    python testenv.py
+    python test_pip.py
 
 4. Try installing nose or line_profiler, rehashing, and running the test
 under the installed executable nosetest or kernprof.
@@ -36,7 +38,7 @@ setup(name="Sum", ext_modules=sum_module, include_dirs=[np.get_include()])
 --- Step 2 may fail: ---
 
 Traceback (most recent call last):
-  File "setup.py", line 29, in <module>
+  File "setup.py", line 31, in <module>
     import numpy as np
   File "/usr/local/var/pyenv/versions/sum/lib/python2.7/site-packages/numpy/__init__.py", line 170, in <module>
     from . import add_newdocs
