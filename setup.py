@@ -23,7 +23,7 @@ Test case for a `pip install` problem under pyenv virtualenv.
     python test_pip.py
 
 4. Try installing nose or line_profiler, rehashing, and running the test
-under the installed executable nosetest or kernprof.
+under the installed executable nosetests or kernprof.
 """
 
 from distutils.core import setup
