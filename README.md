@@ -11,4 +11,4 @@ It's also possible to get through the setup.py stage and encounter the error `Im
 
 ## License
 
-[MIT License](https://github.com/1fish2/BBQTimer/blob/master/LICENSE.md).
+[MIT License](https://github.com/1fish2/pyenv_test/blob/master/LICENSE.md).
