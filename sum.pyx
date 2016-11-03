@@ -1,5 +1,5 @@
 """
-sum.pyx -- Cython test code for pip install under pyenv virtualenv.
+sum.pyx -- Cython test code for a `pip install` problem.
 """
 
 import numpy as np

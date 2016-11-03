@@ -1,5 +1,5 @@
 """
-test_pip.py -- Test case for a `pip install` problem under pyenv virtualenv.
+test_pip.py -- Test case for a `pip install` problem.
 """
 
 import unittest
