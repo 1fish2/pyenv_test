@@ -1,12 +1,19 @@
 # Test case for a `pip install` problem
 
-The key step is
+The key steps are
+
+    pyenv local 2.7.12  # or another release of Python 2.7
     pip install numpy==1.9.2
+
 It completes normally but sets up "import numpy" for failure unless you included the install option `--no-binary :all:` (or omitted the numpy version 1.9.2).
 
-Even then, 
+Similarly,
+
     pip install line_profiler
+
 will install a broken kernprof unless you use the pip install option `--no-binary :all:`.
+
+_The problem only happens under pyenv._
 
 
 ## Steps to reproduce on Mac OS X
