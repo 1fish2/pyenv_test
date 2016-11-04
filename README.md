@@ -11,79 +11,96 @@ will install a broken kernprof unless you use the pip install option `--no-binar
 
 ## Steps to reproduce on Mac OS X
 
-0. Background, if not already done on this computer:
-    brew install pyenv
-    brew install pyenv-virtualenv
-    brew install pyenv-virtualenvwrapper
+1. Background, if not already done on this computer:
 
-1. Install Python 2.7.12 into a virtualenv:
-    cd pyenv_test
-    pyenv install 2.7.12      # Install Python. Optional: Prefix it with CONFIGURE_OPTS="--enable-shared"
-    pyenv local 2.7.12        # Use this version in the local directory
-    pip install --upgrade pip setuptools
-    pyenv rehash
-    #pyenv virtualenv sum; pyenv local sum  # Optional: Create a virtual environment "sum" (so it's quicker to start over) and use it in the local directory
-    pip install numpy==1.9.2  # Problematic! Ditto numpy 1.9.3 or 1.10.4
-    pyenv rehash
+        brew install pyenv
+        brew install pyenv-virtualenv
+        brew install pyenv-virtualenvwrapper
 
-Interestingly, after `pyenv local 2.7.12`,
-    pip list
-prints
-    pip (9.0.0)
-    setuptools (28.7.1)
-    virtualenv (15.0.3)
+2. Install Python 2.7.12 into a virtualenv:
 
-while after `pyenv virtualenv sum; pyenv local sum`,
-    pip list
-prints
-    pip (9.0.0)
-    setuptools (28.7.1)
-    wheel (0.30.0a0)
+        cd pyenv_test
+        pyenv install 2.7.12      # Install Python. Optional: Prefix it with CONFIGURE_OPTS="--enable-shared"
+        pyenv local 2.7.12        # Use this version in the local directory
+        pip install --upgrade pip setuptools
+        pyenv rehash
+        #pyenv virtualenv sum; pyenv local sum  # Optional: Create a virtual environment "sum" (so you can start over by deleting the virtual environment without uninstalling python) and use it in the local directory
+        pip install numpy==1.9.2  # Problematic! Ditto numpy 1.9.3 or 1.10.4
+        pyenv rehash
 
-2. Try to import numpy:
-    python -c "import numpy"
+    Interestingly, after `pyenv local 2.7.12`,
 
-This should produce the traceback, below.
+        pip list
 
-3. Try to run the unit test:
-    python test_pip.py
+    prints
 
-4. Reinstall numpy (1.9.2, 1.9.3, or 1.10.4) from source:
-    pip uninstall numpy     # or delete and recreate the virtualenv
-    pip install --no-binary :all: numpy==1.9.2
-    pyenv rehash
+        pip (9.0.0)
+        setuptools (28.7.1)
+        virtualenv (15.0.3)
 
-Then run the test:
-    python test_pip.py
+    while after `pyenv virtualenv sum; pyenv local sum`,
 
-It should succeed.
+        pip list
 
-5. Reinstall numpy using version 1.11 from binary:
-    pip uninstall numpy     # or delete and recreate the virtualenv
-    pip install numpy==1.11.2
-    pyenv rehash
+    prints
 
-Then run the test:
-    python test_pip.py
+        pip (9.0.0)
+        setuptools (28.7.1)
+        wheel (0.30.0a0)
 
-It should succeed.
+3. Try to import numpy:
 
-6. Either way (after step 4 or 5) running the test under kernprof fails:
-    pip install line_profiler
-    pyenv rehash
-    kernprof -lv test_pip.py
+        python -c "import numpy"
 
-This should produce the traceback, below.
+    This should produce the traceback, below.
 
-7. Again, a fix is to reinstall line_profiler from source:
-    pip uninstall line_profiler
-    pip install --no-binary :all: line_profiler
-    pyenv rehash
-    python test_pip.py
+4. Try to run the unit test:
+
+        python test_pip.py
+
+5. Reinstall numpy (1.9.2, 1.9.3, or 1.10.4) from source:
+
+        pip uninstall numpy     # or delete and recreate the virtualenv
+        pip install --no-binary :all: numpy==1.9.2
+        pyenv rehash
+
+    Then run the test:
+
+        python test_pip.py
+
+    It should succeed.
+
+6. Reinstall numpy using version 1.11 from binary:
+
+        pip uninstall numpy     # or delete and recreate the virtualenv
+        pip install numpy==1.11.2
+        pyenv rehash
+
+    Then run the test:
+
+        python test_pip.py
+
+    It should succeed.
+
+7. Either way (after step 4 or 5) running the test under kernprof fails:
+
+        pip install line_profiler
+        pyenv rehash
+        kernprof -lv test_pip.py
+
+    This should produce the traceback, below.
+
+8. Again, a fix is to reinstall line_profiler from source:
+
+        pip uninstall line_profiler
+        pip install --no-binary :all: line_profiler
+        pyenv rehash
+        python test_pip.py
 
 
---- Step 2 Traceback: ---
+### Step 3 Traceback
 
+```
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
   File "/usr/local/var/pyenv/versions/sum/lib/python2.7/site-packages/numpy/__init__.py", line 180, in <module>
@@ -100,10 +117,11 @@ ImportError: dlopen(/usr/local/var/pyenv/versions/sum/lib/python2.7/site-package
   Referenced from: /usr/local/var/pyenv/versions/sum/lib/python2.7/site-packages/numpy/core/multiarray.so
   Expected in: flat namespace
  in /usr/local/var/pyenv/versions/sum/lib/python2.7/site-packages/numpy/core/multiarray.so
+```
 
+### Step 4 Traceback
 
---- Step 3 Traceback: ---
-
+```
 Traceback (most recent call last):
   File "test_pip.py", line 6, in <module>
     import numpy as np
@@ -121,10 +139,11 @@ ImportError: dlopen(/usr/local/var/pyenv/versions/sum/lib/python2.7/site-package
   Referenced from: /usr/local/var/pyenv/versions/sum/lib/python2.7/site-packages/numpy/core/multiarray.so
   Expected in: flat namespace
  in /usr/local/var/pyenv/versions/sum/lib/python2.7/site-packages/numpy/core/multiarray.so
+```
 
+### Step 7 Traceback
 
---- Step 6 Traceback: ---
-
+```
 Traceback (most recent call last):
   File "/usr/local/var/pyenv/versions/sum/bin/kernprof", line 11, in <module>
     sys.exit(main())
@@ -136,7 +155,7 @@ ImportError: dlopen(/usr/local/var/pyenv/versions/2.7.12/envs/sum/lib/python2.7/
   Referenced from: /usr/local/var/pyenv/versions/2.7.12/envs/sum/lib/python2.7/site-packages/_line_profiler.so
   Expected in: flat namespace
  in /usr/local/var/pyenv/versions/2.7.12/envs/sum/lib/python2.7/site-packages/_line_profiler.so
-
+```
 
 ## License
 
