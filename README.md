@@ -24,7 +24,7 @@ _The problem only happens under pyenv._
         brew install pyenv-virtualenv
         brew install pyenv-virtualenvwrapper
 
-See [pyenv#homebrew-on-mac-os-x](https://github.com/yyuu/pyenv#homebrew-on-mac-os-x) for more steps on installing pyenv.
+    See [pyenv#homebrew-on-mac-os-x](https://github.com/yyuu/pyenv#homebrew-on-mac-os-x) for more steps on installing pyenv.
 
 2. Install Python 2.7.12 into a virtualenv:
 
