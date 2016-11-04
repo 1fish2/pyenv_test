@@ -14,7 +14,7 @@ Similarly,
 
 will install a broken kernprof unless you use the pip install option `--no-binary :all:`.
 
-_The problem only happens under pyenv._
+_The problem only happens with a Python installed by pyenv._
 
 
 ## Steps to reproduce on Mac OS X
