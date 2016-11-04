@@ -2,10 +2,11 @@
 
 The key steps are
 
-    pyenv local 2.7.12  # or another release of Python 2.7
-    pip install numpy==1.9.2
+    pyenv local 2.7.12          # pyenv-install Python 2.7.*
+    pip install numpy==1.9.2    # pip-install numpy 1.9 or 1.10
+    python -c "import numpy"    # try to load numpy
 
-It completes normally but sets up "import numpy" for failure unless you included the install option `--no-binary :all:` (or omitted the numpy version 1.9.2).
+`pip install` completes normally but sets up "import numpy" for failure unless you either included the install option `--no-binary :all:` or let pip default to numpy version 1.11.
 
 Similarly,
 
@@ -33,7 +34,7 @@ _The problem only happens under pyenv._
         pyenv local 2.7.12        # Use this version in the local directory
         pip install --upgrade pip setuptools
         pyenv rehash
-        #pyenv virtualenv sum; pyenv local sum  # Optional: Create a virtual environment "sum" (so you can start over by deleting the virtual environment without uninstalling python) and use it in the local directory
+        #pyenv virtualenv sum; pyenv local sum  # Optional: Create a virtual environment "sum" (so you can delete the virtual environment and restart the experiment from here without uninstalling python) and use it in the local directory
         pip install numpy==1.9.2  # Problematic! Ditto numpy 1.9.3 or 1.10.4
         pyenv rehash
 
