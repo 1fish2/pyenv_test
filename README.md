@@ -18,11 +18,13 @@ _The problem only happens under pyenv._
 
 ## Steps to reproduce on Mac OS X
 
-1. Background, if not already done on this computer:
+1. Preparation, if not already done on this computer:
 
         brew install pyenv
         brew install pyenv-virtualenv
         brew install pyenv-virtualenvwrapper
+
+See [pyenv#homebrew-on-mac-os-x](https://github.com/yyuu/pyenv#homebrew-on-mac-os-x) for more steps on installing pyenv.
 
 2. Install Python 2.7.12 into a virtualenv:
 
