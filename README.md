@@ -68,6 +68,8 @@ _The problem only happens with a Python installed by pyenv._
 
         python test_pip.py
 
+    This should produce the traceback, below.
+
 5. Reinstall numpy (1.9.2, 1.9.3, or 1.10.4) from source:
 
         pip uninstall numpy     # or delete and recreate the virtualenv
@@ -105,7 +107,7 @@ _The problem only happens with a Python installed by pyenv._
         pip uninstall line_profiler
         pip install --no-binary :all: line_profiler
         pyenv rehash
-        python test_pip.py
+        kernprof -lv test_pip.py
 
 
 ### Step 3 Traceback
