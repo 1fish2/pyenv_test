@@ -1,4 +1,4 @@
-# Test case for a `pip install` problem
+# Test case for a `pip install` problem (now fixed)
 
 The key steps are
 
@@ -17,7 +17,7 @@ will install a broken kernprof unless you use the pip install option `--no-binar
 _The problem only happens with a Python installed by pyenv._
 
 
-## Steps to reproduce on Mac OS X
+## Steps to reproduce on Mac OS X 10.11.6 El Capitan
 
 1. Preparation, if not already done on this computer:
 
@@ -25,9 +25,14 @@ _The problem only happens with a Python installed by pyenv._
         brew install pyenv-virtualenv
         brew install pyenv-virtualenvwrapper
 
-    See [pyenv#homebrew-on-mac-os-x](https://github.com/yyuu/pyenv#homebrew-on-mac-os-x) for more steps on installing pyenv.
+    This installs pyenv 1.0.4, pyenv-virtualenv 1.0.0, and pyenv-virtualenvwrapper 20140609.
 
-2. Install Python 2.7.12 into a virtualenv:
+    See `brew info pyenv`, `brew info pyenv-virtualenv`, and maybe [pyenv#homebrew-on-mac-os-x](https://github.com/yyuu/pyenv#homebrew-on-mac-os-x) for more steps on installing pyenv, in short, put:
+        export PYENV_ROOT=/usr/local/var/pyenv
+        if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+    into your `.profile` file and either run it manually or restart the shell.
+
+2. Install Python 2.7.12 and numpy into a virtualenv:
 
         cd pyenv_test
         pyenv install 2.7.12      # Install Python. Optional: Prefix it with CONFIGURE_OPTS="--enable-shared"
@@ -35,28 +40,21 @@ _The problem only happens with a Python installed by pyenv._
         pip install --upgrade pip setuptools
         pyenv rehash
         #pyenv virtualenv sum; pyenv local sum  # Optional: Create a virtual environment "sum" (so you can delete the virtual environment and restart the experiment from here without uninstalling python) and use it in the local directory
-        pip install numpy==1.9.2  # Problematic! Ditto numpy 1.9.3 or 1.10.4
+        pip install numpy==1.10.4  # Problematic! Ditto numpy 1.9.2 or 1.9.3
         pyenv rehash
 
-    Interestingly, after `pyenv local 2.7.12`,
+    Now
 
         pip list
 
     prints
 
-        pip (9.0.0)
-        setuptools (28.7.1)
-        virtualenv (15.0.3)
+        numpy (1.10.4)
+        pip (9.0.1)
+        setuptools (29.0.1)
+        wheel (0.29.0)      # <-- if you created a virtualenv
 
-    while after `pyenv virtualenv sum; pyenv local sum`,
-
-        pip list
-
-    prints
-
-        pip (9.0.0)
-        setuptools (28.7.1)
-        wheel (0.30.0a0)
+    *Note:* The bug last reproduced with pip 9.0.0 and setuptools 28.7.1 but not with pip 9.0.1 and setuptools 29.0.1! Yay!
 
 3. Try to import numpy:
 
