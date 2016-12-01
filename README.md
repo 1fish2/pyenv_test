@@ -28,8 +28,10 @@ _The problem only happens with a Python installed by pyenv._
     This installs pyenv 1.0.4, pyenv-virtualenv 1.0.0, and pyenv-virtualenvwrapper 20140609.
 
     See `brew info pyenv`, `brew info pyenv-virtualenv`, and maybe [pyenv#homebrew-on-mac-os-x](https://github.com/yyuu/pyenv#homebrew-on-mac-os-x) for more steps on installing pyenv, in short, put:
+
         export PYENV_ROOT=/usr/local/var/pyenv
         if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
     into your `.profile` file and either run it manually or restart the shell.
 
 2. Install Python 2.7.12 and numpy into a virtualenv:
@@ -54,7 +56,7 @@ _The problem only happens with a Python installed by pyenv._
         setuptools (29.0.1)
         wheel (0.29.0)      # <-- if you created a virtualenv
 
-    *Note:* The bug last reproduced with pip 9.0.0 and setuptools 28.7.1 but not with pip 9.0.1 and setuptools 29.0.1! Yay!
+    **Note:** The bug last reproduced with pip 9.0.0 and setuptools 28.7.1 but not with pip 9.0.1 and setuptools 29.0.1! Yay!
 
 3. Try to import numpy:
 
