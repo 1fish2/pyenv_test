@@ -40,23 +40,12 @@ _The problem only happens with a Python installed by pyenv._
         pyenv install 2.7.12      # Install Python. Optional: Prefix it with CONFIGURE_OPTS="--enable-shared"
         pyenv local 2.7.12        # Use this version in the local directory
         pip install --upgrade pip setuptools
+        pyenv rehash              # Now `pip list` lists pip (9.0.1), setuptools (30.0.0)
+        #pyenv virtualenv sum; pyenv local sum  # Optional: Create a virtual environment "sum" (so you can delete the virtual environment and restart the experiment from here without uninstalling python) and use it in the local directory. Now `pip list` includes wheel (0.29.0).
+        pip install numpy==1.10.4  # Problematic! (Ditto numpy 1.9.2 or 1.9.3.) Now `pip list` includes numpy (1.10.4).
         pyenv rehash
-        #pyenv virtualenv sum; pyenv local sum  # Optional: Create a virtual environment "sum" (so you can delete the virtual environment and restart the experiment from here without uninstalling python) and use it in the local directory
-        pip install numpy==1.10.4  # Problematic! Ditto numpy 1.9.2 or 1.9.3
-        pyenv rehash
 
-    Now
-
-        pip list
-
-    prints
-
-        numpy (1.10.4)
-        pip (9.0.1)
-        setuptools (29.0.1)
-        wheel (0.29.0)      # <-- if you created a virtualenv
-
-    **Note:** The bug last reproduced with pip 9.0.0 and setuptools 28.7.1 but not with pip 9.0.1 and setuptools 29.0.1! Yay!
+    _**==> Note:** The bug last reproduced with pip 9.0.0 and setuptools 28.7.1 but not with pip 9.0.1 and setuptools 29.0.1+! Yay!_
 
 3. Try to import numpy:
 
@@ -70,7 +59,7 @@ _The problem only happens with a Python installed by pyenv._
 
     This should produce the traceback, below.
 
-5. Reinstall numpy (1.9.2, 1.9.3, or 1.10.4) from source:
+5. Reinstall numpy (same version) from source:
 
         pip uninstall numpy     # or delete and recreate the virtualenv
         pip install --no-binary :all: numpy==1.9.2
